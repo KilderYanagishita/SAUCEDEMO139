@@ -37,25 +37,56 @@ namespace MyNamespace
         [Given(@"que acesso a pagina inicial do site")]
         public void DadoQueAcessoAPaginaInicialDoSite()
         {
-            _scenarioContext.Pending();
+            driver.Navigate().GoToUrl("https://www.saucedemo.com/");
         }
 
         [When(@"preecho o usuario como ""(.*)""")]
-        public void QuandoPreechoOUsuarioComo(string p0)
+        public void QuandoPreechoOUsuarioComo(string username)
         {
-            _scenarioContext.Pending();
+            driver.FindElement(By.Id("user-name")).SendKeys(username);
         }
 
         [When(@"a senha ""(.*)"" e clico no botao Login")]
-        public void QuandoASenhaEClicoNoBotaoLogin(string p0)
+        public void QuandoASenhaEClicoNoBotaoLogin(string password)
         {
-            _scenarioContext.Pending();
+            driver.FindElement(By.Id("password")).SendKeys(password);
+            driver.FindElement(By.Id("login-button")).Click();
         }
 
         [When(@"adiciono o produto no ""(.*)"" ao carrinho")]
-        public void QuandoAdicionoOProdutoNoAoCarrinho(string p0)
+        public void QuandoAdicionoOProdutoNoAoCarrinho(string product)
         {
-            _scenarioContext.Pending();
+            String productSelector = "add-to-cart-" + product.ToLower().Replace(" ","-");
+            Console.WriteLine($"Seletor de Produtos = {productSelector}");
+        }
+                [When(@"clico no icone do carrinho de compras")]
+        public void QuandoClicoNoIconeDoCarrinhoDeCompras()
+        {
+            
+        }
+
+        [Then(@"exibe ""Products' no titulo da secao")]
+        public void EntaoExibeProductsNoTituloDaSecao(String title)
+        {
+            Assert.That(driver.FindElement(By.CssSelector("span.title")).Text, Is.EquivalentTo(title));
+        }
+
+        [Then(@"exibe a pagina do carrinho com a quantidade ""(.*)""")]
+        public void EntaoExibeAPaginaDoCarrinhoComAQuantidade(string p0)
+        {
+            
+        }
+
+        [Then(@"nome do produto ""(.*)""")]
+        public void EntaoNomeDoProduto(string p0)
+        {
+            
+        }
+
+        [Then(@"o preco como ""(.*)""")]
+        public void EntaoOPrecoComo(string p0)
+        {
+            
         }
     }
 }
